@@ -48,7 +48,7 @@ public class ATM {
 				System.out.print("bye");
 				return;
 			default:
-				System.out.println("Please Choose correct choice");
+				System.out.println("Please choose correct option");
 				break;
 			}
 		}
@@ -311,7 +311,7 @@ public class ATM {
 					session = false;
 					break;
 				default:
-					System.out.println("Please Choose correct choice");
+					System.out.println("Please choose correct option");
 					break;
 				}
 			}
@@ -336,7 +336,7 @@ public class ATM {
 		if (isFirstWithdraw) {
 			atm.withdrawMoney(atm, cust, cus, in);
 		} else {
-			System.out.print("Enter Pin");
+			System.out.print("Enter Pin: ");
 			int pwd = in.nextInt();
 			if (cus.getPinNo() == pwd) {
 				atm.withdrawMoney(atm, cust, cus, in);
@@ -361,7 +361,7 @@ public class ATM {
 						InputStream fileIs = null;
 						ObjectInputStream objIs = null;
 						try {
-							fileIs = new FileInputStream("ATMBalance.txt");
+							fileIs = new FileInputStream(PATH_ATM_BAL);
 							objIs = new ObjectInputStream(fileIs);
 							HashMap<Integer, ATMMachineMoney> map = (HashMap<Integer, ATMMachineMoney>) objIs
 									.readObject();
@@ -421,7 +421,7 @@ public class ATM {
 										newAtm[j].setCount(count);
 										newAtm[j].setTotal(total);
 										map.put(key, newAtm[j]);
-										System.out.println("Note: " + key + " - " + " count:" + noteCounter[j]);
+										System.out.println("Currency Note: " + key + " - " + "count:" + noteCounter[j]);
 									}
 									j++;
 								}
@@ -431,11 +431,11 @@ public class ATM {
 
 								for (j = 0; j < cust.length; j++) {
 									if (cust[j].getAccNo() == cus.getAccNo()) {
-										System.out.println(checkAmount);
 										long bal = cust[j].getAccBal() - checkAmount;
 										cust[j].setAccBal(bal);
 									}
 								}
+								System.out.println(checkAmount + " Rupees withdraw successfully");
 								atm.storeObject(PATH_CUSTOMER, null, cust);
 								System.out.println("Check Balance YES - 1:");
 								int d = in.nextInt();
@@ -446,16 +446,6 @@ public class ATM {
 							} else {
 								System.out.println("ATM has lesser than your amount");
 							}
-
-//						            System.out.println("-------------------------------------");
-//						            System.out.println("| Denomination |" + " Number |" + " Value     |");
-//						            System.out.println("-------------------------------------");
-//						            for(int i = 0; i < atm.length; i++) {
-//						            	System.out.format("| %-12d | %-6d | %-9d |", atm[i].getDenomination(), atm[i].getCount(), atm[i].getTotal());
-//							            System.out.println();
-//						            }
-//						            	
-//						            System.out.println("-------------------------------------");
 						} catch (FileNotFoundException e) {
 							e.printStackTrace();
 						} catch (IOException e) {
@@ -510,17 +500,11 @@ public class ATM {
 						}
 					}
 
-					System.out.println("------------------------------------------------------------");
-					System.out.println("| Acc No |" + " Account Holder |" + " Pin Number |" + " Account Balance  |");
-					System.out.println("------------------------------------------------------------");
 					for (int i = 0; i < customer.length; i++) {
 						cust[i] = customer[i];
-						System.out.format(Locale.ENGLISH, "| %-6d | %-14s | %-10d | %-16s₹ |", customer[i].getAccNo(),
-								customer[i].getAccHolder(), customer[i].getPinNo(),
-								myFormat.format(customer[i].getAccBal()));
-						System.out.println();
 					}
-					System.out.println("-----------------------------------------------------------");
+					
+					System.out.println("Amount Transfered Successfully ");
 				} else {
 					System.out.println(
 							"Max transfer limit per transaction cannot exceed 10,000 ₹ and should be more than 1000 ₹");
