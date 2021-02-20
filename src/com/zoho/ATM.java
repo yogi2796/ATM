@@ -384,19 +384,13 @@ public class ATM {
 									} else if (newAtm[2].getCount() >= 10) {
 										noteCounter[2] = 10;
 										amount -= 1000;
-									}else {
-										System.out.println("Insufficient Notes");
-										return;
 									}
 								} else if (amount <= 10000 && amount > 5000) {
 									rem = amount % 1000;
 									int c = (int) rem / 100;
 									noteCounter[2] = c;
 									amount -= c * 100;
-//									noteCounter[2] = 10;
-//									amount -= 1000;
-								} else {
-								}
+								} else {}
 
 								j = 0;
 								for (Integer key : map.keySet()) {
