@@ -377,19 +377,24 @@ public class ATM {
 							}
 							if (amount <= atmTotal) {
 								newAtm[2] = map.get(100);
-								if (amount <= 10000 && amount > 5000) {
+								if (amount <= 5000 && amount > 1500) {
 									if (newAtm[2].getCount() >= 15) {
 										noteCounter[2] = 15;
 										amount -= 1500;
 									} else if (newAtm[2].getCount() >= 10) {
 										noteCounter[2] = 10;
 										amount -= 1000;
+									}else {
+										System.out.println("Insufficient Notes");
+										return;
 									}
-								} else if (amount <= 5000 && amount > 1500) {
+								} else if (amount <= 10000 && amount > 5000) {
 									rem = amount % 1000;
 									int c = (int) rem / 100;
 									noteCounter[2] = c;
 									amount -= c * 100;
+//									noteCounter[2] = 10;
+//									amount -= 1000;
 								} else {
 								}
 
@@ -461,7 +466,7 @@ public class ATM {
 							}
 						}
 					} else {
-						System.out.print("Insufficient Balance");
+						System.out.print("Account balance is lower than entered withdrawal amount.");
 					}
 				}
 			}
