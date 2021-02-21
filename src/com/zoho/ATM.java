@@ -28,6 +28,7 @@ public class ATM {
 
 		Scanner n = new Scanner(System.in);
 		boolean flag = true;
+		System.out.println("Welcome to ZOHO ATM");
 
 		while (flag) {
 			System.out.println(
@@ -45,7 +46,7 @@ public class ATM {
 				atm.showATMOperation(atm, n, cust);
 				break;
 			case 4:
-				System.out.print("bye");
+				System.out.print("Thank you visiting ZOHO ATM");
 				return;
 			default:
 				System.out.println("Please choose correct option");
